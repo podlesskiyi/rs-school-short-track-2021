@@ -1,8 +1,8 @@
 /**
- * Given an array of domains, return the object with the appearances of the DNS.
+ * Given an array of domains, return the resultObj with the appearances of the DNS.
  *
  * @param {Array} domains
- * @return {Object}
+ * @return {resultObj}
  *
  * @example
  * domains = [
@@ -20,8 +20,18 @@
  * }
  *
  */
-function getDNSStats(/* domains */) {
-  throw new Error('Not implemented');
+function getDNSStats(domains) {
+  const resultObj = {};
+  for (let i = 0; i < domains.length; i++) {
+    const wordsArray = domains[i].split('.');
+    let string = '';
+    for (let j = wordsArray.length - 1; j >= 0; j--) {
+      string += `.${wordsArray[j]}`;
+      if (!resultObj[string]) resultObj[string] = 1;
+      else resultObj[string]++;
+    }
+  }
+  return resultObj;
 }
 
 module.exports = getDNSStats;
